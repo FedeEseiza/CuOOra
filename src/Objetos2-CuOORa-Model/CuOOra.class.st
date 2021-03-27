@@ -15,7 +15,7 @@ CuOOra >> initialize [
 
 { #category : #accesing }
 CuOOra >> obtenerPreguntasRelacionadasA: unTopico [
-	^ self obtenetPreguntasDeUsuarios
+	^ self preguntasDeLosUsuarios
 		select: [ :each | each tenesComoTopicoA: unTopico ]
 ]
 
@@ -25,11 +25,6 @@ CuOOra >> obtenerPreguntasRelevantesDe: unUsuario [
 		select: [ :each | 
 			(unUsuario teInteresaEstaPregunta: each)
 				or: (each tuCreadorEsSeguidoPor: unUsuario) ]
-]
-
-{ #category : #accesing }
-CuOOra >> obtenetPreguntasDeUsuarios [
-	^ usuarios flatCollect: [ :each | each misPreguntas ]
 ]
 
 { #category : #accesing }
