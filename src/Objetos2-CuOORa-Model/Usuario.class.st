@@ -1,59 +1,1 @@
-Class {
-	#name : #Usuario,
-	#superclass : #Object,
-	#instVars : [
-		'topicosDeInteres',
-		'follows',
-		'followers',
-		'preguntas',
-		'nombreDeUsuario',
-		'password'
-	],
-	#category : #'Objetos2-CuOORa-Model'
-}
-
-{ #category : #accesing }
-Usuario >> agregarPregunta: unaPregunta [
-	preguntas add: unaPregunta
-]
-
-{ #category : #accesing }
-Usuario >> agregarSeguidor: unUsuario [
-	followers add: unUsuario
-]
-
-{ #category : #initialization }
-Usuario >> initialize [
-	followers := OrderedCollection new.
-	follows := OrderedCollection new.
-	preguntas := OrderedCollection new.
-	topicosDeInteres := OrderedCollection new
-]
-
-{ #category : #accesing }
-Usuario >> misPreguntas [
-	^ preguntas 
-]
-
-{ #category : #accesing }
-Usuario >> nombreDeUsuario [
-	^ nombreDeUsuario 
-]
-
-{ #category : #accesing }
-Usuario >> seguirA: unUsuario [
-	follows add: unUsuario.
-	unUsuario agregarSeguidor: self
-]
-
-{ #category : #accesing }
-Usuario >> teInteresaEstaPregunta: unaPregunta [
-	^ topicosDeInteres
-		anySatisfy: [ :each | unaPregunta tenesComoTopicoA: each ]
-]
-
-{ #category : #accesing }
-Usuario >> teSigue: unUsuario [
-	^ followers
-		anySatisfy: [ :each | each nombreDeUsuario = unUsuario nombreDeUsuario ]
-]
+'From Pharo8.0.0 of 22 December 2020 [Build information: Pharo-8.0.0+build.1145.sha.7dc39ed9e28dda58cf139f1723f350d5361d9b0f (64 Bit)] on 31 March 2021 at 4:49:36.410938 pm'!Object subclass: #Usuario	instanceVariableNames: 'topicosDeInteres follows followers preguntas nombreDeUsuario password respuestas'	classVariableNames: ''	package: 'Objetos2-CuOORa-Model'!!Usuario methodsFor: 'as yet unclassified' stamp: 'nc 3/30/2021 19:27'!agregarTopicoDeInteres: topico	topicosDeInteres add: topico! !!Usuario methodsFor: 'accessing' stamp: 'nc 3/30/2021 00:58'!nombreDeUsuario: user	nombreDeUsuario := user! !!Usuario methodsFor: 'accessing' stamp: 'nc 3/30/2021 00:58'!password	^ password! !!Usuario methodsFor: 'accessing' stamp: 'nc 3/30/2021 20:02'!respuestas	^ respuestas! !!Usuario methodsFor: 'accessing' stamp: 'nc 3/30/2021 00:58'!password: pass	password := pass! !!Usuario methodsFor: 'initialization' stamp: 'nc 3/30/2021 19:43'!initialize	followers := OrderedCollection new.	follows := OrderedCollection new.	preguntas := OrderedCollection new.	topicosDeInteres := OrderedCollection new! !!Usuario methodsFor: 'accesing' stamp: 'Anonymous 3/26/2021 23:20'!seguirA: unUsuario	follows add: unUsuario.	unUsuario agregarSeguidor: self! !!Usuario methodsFor: 'accesing' stamp: 'Anonymous 3/27/2021 00:27'!nombreDeUsuario	^ nombreDeUsuario ! !!Usuario methodsFor: 'accesing' stamp: 'Anonymous 3/26/2021 23:14'!agregarPregunta: unaPregunta	preguntas add: unaPregunta! !!Usuario methodsFor: 'accesing' stamp: 'Anonymous 3/26/2021 23:26'!misPreguntas	^ preguntas ! !!Usuario methodsFor: 'accesing' stamp: 'Anonymous 3/27/2021 00:21'!teInteresaEstaPregunta: unaPregunta	^ topicosDeInteres		anySatisfy: [ :each | unaPregunta tenesComoTopicoA: each ]! !!Usuario methodsFor: 'accesing' stamp: 'Anonymous 3/26/2021 23:20'!agregarSeguidor: unUsuario	followers add: unUsuario! !!Usuario methodsFor: 'accesing' stamp: 'Anonymous 3/27/2021 00:31'!teSigue: unUsuario	^ followers		anySatisfy: [ :each | each nombreDeUsuario = unUsuario nombreDeUsuario ]! !"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!Usuario class	instanceVariableNames: ''!!Usuario class methodsFor: 'instance creation' stamp: 'nc 3/30/2021 00:57'!user: nombre password: pass	^ self new		nombreDeUsuario: nombre;		password: pass! !
