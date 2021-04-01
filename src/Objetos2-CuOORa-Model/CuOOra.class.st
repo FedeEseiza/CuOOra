@@ -10,7 +10,8 @@ Class {
 
 { #category : #initialization }
 CuOOra >> initialize [
-	usuarios := OrderedCollection new
+	usuarios := OrderedCollection new.
+	topicos := OrderedCollection new. 
 ]
 
 { #category : #accesing }
@@ -30,4 +31,14 @@ CuOOra >> obtenerPreguntasRelevantesDe: unUsuario [
 { #category : #accesing }
 CuOOra >> preguntasDeLosUsuarios [
 	^ usuarios flatCollect: [ :each | each misPreguntas ]
+]
+
+{ #category : #accesing }
+CuOOra >> topicos [
+	^ topicos 
+]
+
+{ #category : #accesing }
+CuOOra >> usuarios [
+	^ usuarios
 ]

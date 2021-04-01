@@ -12,6 +12,11 @@ Class {
 	#category : #'Objetos2-CuOORa-Model'
 }
 
+{ #category : #creation }
+Usuario class >> nombreDeUsuario: unNombre password: pass [
+	^ self new nombreDeUsuario: unNombre password: pass
+]
+
 { #category : #accesing }
 Usuario >> agregarPregunta: unaPregunta [
 	preguntas add: unaPregunta
@@ -38,6 +43,12 @@ Usuario >> misPreguntas [
 { #category : #accesing }
 Usuario >> nombreDeUsuario [
 	^ nombreDeUsuario 
+]
+
+{ #category : #accesing }
+Usuario >> nombreDeUsuario: unNombre password: pass [
+	nombreDeUsuario := unNombre.
+	password := pass
 ]
 
 { #category : #accesing }

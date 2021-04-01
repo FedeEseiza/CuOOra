@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'creadorDelPosteo',
-		'fechaYHoraDeCreacion'
+		'fechaYHoraDeCreacion',
+		'puntajes'
 	],
 	#category : #'Objetos2-CuOORa-Model'
 }
