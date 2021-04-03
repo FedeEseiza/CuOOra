@@ -35,6 +35,18 @@ Pregunta >> newPreguntaConTitulo: unTitulo descripcion: unaDescripcion topico: u
 ]
 
 { #category : #accesing }
+Pregunta >> respuestasOrdenadasPorPuntaje [
+	^ respuestas
+		asSortedCollection: [ :a :b | a mayorPuntaje > b mayorPuntaje ]
+]
+
+{ #category : #accesing }
 Pregunta >> tenesComoTopicoA: unTopico [
 	^ topicos anySatisfy: [ :each | each nombre ]
+]
+
+{ #category : #accesing }
+Pregunta >> tenesUnaRespuestaDe: nombreDeUsuario [
+	^ respuestas
+		select: [ :each | each creadorDelPosteo = nombreDeUsuario ]
 ]
