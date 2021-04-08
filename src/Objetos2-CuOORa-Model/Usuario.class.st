@@ -18,13 +18,30 @@ Usuario class >> nombreDeUsuario: unNombre password: pass [
 ]
 
 { #category : #accesing }
-Usuario >> agregarPregunta: unaPregunta [
-	preguntas add: unaPregunta
+Usuario >> agregarPreguntaConTitulo: unTitulo descripcion: unaDescripcion topico: unTopico [
+	^ preguntas
+		add:
+			(Pregunta
+				newPreguntaConTitulo: unTitulo
+				descripcion: unaDescripcion
+				topico: unTopico
+				usuario: self)
+]
+
+{ #category : #accesing }
+Usuario >> agregarRespuestaDeLaPregunta: unaPregunta texto: unTexto [
+	^ unaPregunta
+		agregarRespuesta: (Respuesta texto: unTexto usuario: self deLaPregunta: unaPregunta)
 ]
 
 { #category : #accesing }
 Usuario >> agregarSeguidor: unUsuario [
 	followers add: unUsuario
+]
+
+{ #category : #accesing }
+Usuario >> agregarTopicoDeInteres: topico [
+	topicosDeInteres add: topico
 ]
 
 { #category : #initialization }
@@ -49,6 +66,16 @@ Usuario >> nombreDeUsuario [
 Usuario >> nombreDeUsuario: unNombre password: pass [
 	nombreDeUsuario := unNombre.
 	password := pass
+]
+
+{ #category : #'as yet unclassified' }
+Usuario >> puntajeDePreguntas [
+	^ (self misPreguntas size) * 20
+]
+
+{ #category : #'as yet unclassified' }
+Usuario >> puntajeDiferenciaDePreguntas [
+	^ self misPreguntas sumNumbers: [ :each | each mayorPuntaje ]
 ]
 
 { #category : #accesing }

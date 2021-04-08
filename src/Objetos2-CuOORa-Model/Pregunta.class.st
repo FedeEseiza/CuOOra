@@ -19,10 +19,16 @@ Pregunta class >> newPreguntaConTitulo: unTitulo descripcion: unaDescripcion top
 		usuario: unUsuario
 ]
 
+{ #category : #accesing }
+Pregunta >> agregarRespuesta: unaRespuesta [
+	^ respuestas add: unaRespuesta
+]
+
 { #category : #initialization }
 Pregunta >> initialize [ 
-	fechaYHoraDeCreacion := Date today.
 	respuestas := OrderedCollection new.
+	topicos := OrderedCollection new. 
+	super initialize .
 	
 ]
 
@@ -42,11 +48,16 @@ Pregunta >> respuestasOrdenadasPorPuntaje [
 
 { #category : #accesing }
 Pregunta >> tenesComoTopicoA: unTopico [
-	^ topicos anySatisfy: [ :each | each nombre ]
+	^ topicos anySatisfy: [ :each | each nombre = unTopico nombre]
 ]
 
 { #category : #accesing }
 Pregunta >> tenesUnaRespuestaDe: nombreDeUsuario [
 	^ respuestas
-		select: [ :each | each creadorDelPosteo = nombreDeUsuario ]
+		select: [ :each | each creadorDelPosteo nombreDeUsuario  = nombreDeUsuario ]
+]
+
+{ #category : #accesing }
+Pregunta >> titulo [
+	^ titulo 
 ]

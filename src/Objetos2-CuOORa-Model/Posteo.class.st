@@ -10,13 +10,14 @@ Class {
 }
 
 { #category : #accesing }
-Posteo >> agregarPuntuacionLikeDe: unUsuario [
-	puntuaciones add: (Puntuacion puntuador: unUsuario esLike: True)
+Posteo >> agregarPuntuacionDe: unUsuario esLike: boolean [
+	puntuaciones add: (Puntuacion puntuador: unUsuario esLike: boolean)
 ]
 
 { #category : #accesing }
-Posteo >> cambiarPuntuacion: unUsuario [
-	puntuaciones remove: (self obtenerLikeODislikeDe: unUsuario)
+Posteo >> cambiarPuntuacionDe: unUsuario esLike: boolean [
+	puntuaciones remove: (self obtenerLikeODislikeDe: unUsuario).
+	self agregarPuntuacionDe: unUsuario esLike: boolean
 ]
 
 { #category : #accesing }
@@ -48,21 +49,36 @@ Posteo >> mayorPuntaje [
 { #category : #accesing }
 Posteo >> obtenerLikeODislikeDe: unUsuario [
 	^ puntuaciones
-		select: [ :each | each puntuador = unUsuario nombreDeUsuario ]
+		select: [ :each | each puntuador nombreDeUsuario = unUsuario nombreDeUsuario ]
+]
+
+{ #category : #accesing }
+Posteo >> obtenerPuntuacionDe: unUsuario [
+	^ (puntuaciones
+		detect: [ :each | each puntuador nombreDeUsuario = unUsuario nombreDeUsuario ])
+		esLike
+]
+
+{ #category : #accesing }
+Posteo >> registrarDislikeDe: unUsuario [
+	(self tenesPuntuacionDe: unUsuario)
+		ifFalse: [ self agregarPuntuacionDe: unUsuario esLike: false ]
+		ifTrue: [ (self obtenerPuntuacionDe: unUsuario)
+				ifTrue: [ self cambiarPuntuacionDe: unUsuario esLike: true ] ]
 ]
 
 { #category : #accesing }
 Posteo >> registrarLikeDe: unUsuario [
 	(self tenesPuntuacionDe: unUsuario)
-		ifFalse: [ self agregarPuntuacionLikeDe: unUsuario ]
-		ifTrue: [ self cambiarPuntuacion: unUsuario.
-			self agregarPuntuacionLikeDe: unUsuario ]
+		ifFalse: [ self agregarPuntuacionDe: unUsuario esLike: true ]
+		ifTrue: [ (self obtenerPuntuacionDe: unUsuario)
+				ifFalse: [ self cambiarPuntuacionDe: unUsuario esLike: false ] ]
 ]
 
 { #category : #accesing }
 Posteo >> tenesPuntuacionDe: unUsuario [
 	^ puntuaciones
-		anySatisfy: [ :each | each puntuador = unUsuario nombreDeUsuario ]
+		anySatisfy: [ :each | each puntuador nombreDeUsuario = unUsuario nombreDeUsuario ]
 ]
 
 { #category : #accesing }
