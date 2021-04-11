@@ -34,7 +34,7 @@ Usuario >> agregarRespuestaDeLaPregunta: unaPregunta texto: unTexto [
 		agregarRespuesta: (Respuesta texto: unTexto usuario: self deLaPregunta: unaPregunta)
 ]
 
-{ #category : #accesing }
+{ #category : #private }
 Usuario >> agregarSeguidor: unUsuario [
 	followers add: unUsuario
 ]
@@ -47,7 +47,6 @@ Usuario >> agregarTopicoDeInteres: topico [
 { #category : #initialization }
 Usuario >> initialize [
 	followers := OrderedCollection new.
-	follows := OrderedCollection new.
 	preguntas := OrderedCollection new.
 	topicosDeInteres := OrderedCollection new
 ]
@@ -68,23 +67,22 @@ Usuario >> nombreDeUsuario: unNombre password: pass [
 	password := pass
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 Usuario >> puntajeDePreguntas [
 	^ (self misPreguntas size) * 20
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 Usuario >> puntajeDiferenciaDePreguntas [
 	^ self misPreguntas sumNumbers: [ :each | each mayorPuntaje ]
 ]
 
 { #category : #accesing }
 Usuario >> seguirA: unUsuario [
-	follows add: unUsuario.
 	unUsuario agregarSeguidor: self
 ]
 
-{ #category : #accesing }
+{ #category : #private }
 Usuario >> teInteresaEstaPregunta: unaPregunta [
 	^ topicosDeInteres
 		anySatisfy: [ :each | unaPregunta tenesComoTopicoA: each ]
@@ -94,4 +92,9 @@ Usuario >> teInteresaEstaPregunta: unaPregunta [
 Usuario >> teSigue: unUsuario [
 	^ followers
 		anySatisfy: [ :each | each nombreDeUsuario = unUsuario nombreDeUsuario ]
+]
+
+{ #category : #accesing }
+Usuario >> topicosDeInteres [
+	^ topicosDeInteres 
 ]

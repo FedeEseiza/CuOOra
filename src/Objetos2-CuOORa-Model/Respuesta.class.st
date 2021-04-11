@@ -9,11 +9,6 @@ Class {
 }
 
 { #category : #creation }
-Respuesta class >> texto: unTexto usuario: unUsuario [
-	^ self new texto: unTexto usuario: unUsuario
-]
-
-{ #category : #creation }
 Respuesta class >> texto: unTexto usuario: unUsuario deLaPregunta: unaPregunta [ .
 	^ self new texto: unTexto usuario: unUsuario deLaPregunta: unaPregunta .
 ]
@@ -29,9 +24,8 @@ Respuesta >> pregunta [
 ]
 
 { #category : #accessing }
-Respuesta >> texto: unTexto usuario: unUsuario [
-	texto := unTexto.
-	creadorDelPosteo := unUsuario
+Respuesta >> texto [
+	^ texto 
 ]
 
 { #category : #accessing }

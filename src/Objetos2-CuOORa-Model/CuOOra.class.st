@@ -5,14 +5,41 @@ Class {
 		'usuarios',
 		'topicos'
 	],
+	#classInstVars : [
+		'cuoora',
+		'pedro',
+		'diego',
+		'juan',
+		'topicoOO1',
+		'topicoTestDeUnidad',
+		'topicoSmalltalk',
+		'preguntaDePedro',
+		'preguntaDeDiego',
+		'respuestaDeDiego',
+		'respuestaDePedro'
+	],
 	#category : #'Objetos2-CuOORa-Model'
 }
+
+{ #category : #example }
+CuOOra class >> example [
+	cuoora := CuOOra new.
+	self exampleUsuarios .
+	^ cuoora
+]
+
+{ #category : #example }
+CuOOra class >> exampleUsuarios [
+	cuoora agregarUsuario: 'pedro@cuoora.com' passwd: 'pedro@cuoora.com'.
+	cuoora agregarUsuario: 'diego@cuoora.com' passwd: 'diego@cuoora.com'.
+	cuoora agregarUsuario: 'juan@cuoora.com' passwd: 'juan@cuoora.com'
+]
 
 { #category : #accesing }
 CuOOra >> agregarTopico: nombre y: descripcion [
 	 (self existeElTopico: nombre)
 		ifTrue: [ ^ 'El topico ya existe' ]
-		ifFalse: [ topicos add: (Topico nombre: nombre descripcion: descripcion) ]
+		ifFalse: [ ^topicos add: (Topico nombre: nombre descripcion: descripcion) ]
 ]
 
 { #category : #accesing }

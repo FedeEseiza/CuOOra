@@ -41,6 +41,11 @@ Pregunta >> newPreguntaConTitulo: unTitulo descripcion: unaDescripcion topico: u
 ]
 
 { #category : #accesing }
+Pregunta >> respuestas [ 
+	^ respuestas 
+]
+
+{ #category : #accesing }
 Pregunta >> respuestasOrdenadasPorPuntaje [
 	^ respuestas
 		asSortedCollection: [ :a :b | a mayorPuntaje > b mayorPuntaje ]

@@ -9,12 +9,12 @@ Class {
 	#category : #'Objetos2-CuOORa-Model'
 }
 
-{ #category : #accesing }
+{ #category : #private }
 Posteo >> agregarPuntuacionDe: unUsuario esLike: boolean [
 	puntuaciones add: (Puntuacion puntuador: unUsuario esLike: boolean)
 ]
 
-{ #category : #accesing }
+{ #category : #private }
 Posteo >> cambiarPuntuacionDe: unUsuario esLike: boolean [
 	puntuaciones remove: (self obtenerLikeODislikeDe: unUsuario).
 	self agregarPuntuacionDe: unUsuario esLike: boolean
@@ -37,7 +37,7 @@ Posteo >> creadorDelPosteo [
 
 { #category : #initialization }
 Posteo >> initialize [ 
-	fechaYHoraDeCreacion := DateAndTime .
+	fechaYHoraDeCreacion := DateAndTime now.
 	puntuaciones := OrderedCollection new.
 ]
 
@@ -46,13 +46,13 @@ Posteo >> mayorPuntaje [
 	^ self cantidadDeLikes - self cantidadDeDislikes
 ]
 
-{ #category : #accesing }
+{ #category : #private }
 Posteo >> obtenerLikeODislikeDe: unUsuario [
 	^ puntuaciones
-		select: [ :each | each puntuador nombreDeUsuario = unUsuario nombreDeUsuario ]
+		detect: [ :each | each puntuador nombreDeUsuario = unUsuario nombreDeUsuario ]
 ]
 
-{ #category : #accesing }
+{ #category : #private }
 Posteo >> obtenerPuntuacionDe: unUsuario [
 	^ (puntuaciones
 		detect: [ :each | each puntuador nombreDeUsuario = unUsuario nombreDeUsuario ])
@@ -64,7 +64,7 @@ Posteo >> registrarDislikeDe: unUsuario [
 	(self tenesPuntuacionDe: unUsuario)
 		ifFalse: [ self agregarPuntuacionDe: unUsuario esLike: false ]
 		ifTrue: [ (self obtenerPuntuacionDe: unUsuario)
-				ifTrue: [ self cambiarPuntuacionDe: unUsuario esLike: true ] ]
+				ifTrue: [ self cambiarPuntuacionDe: unUsuario esLike: false ] ]
 ]
 
 { #category : #accesing }
@@ -75,13 +75,13 @@ Posteo >> registrarLikeDe: unUsuario [
 				ifFalse: [ self cambiarPuntuacionDe: unUsuario esLike: false ] ]
 ]
 
-{ #category : #accesing }
+{ #category : #private }
 Posteo >> tenesPuntuacionDe: unUsuario [
 	^ puntuaciones
 		anySatisfy: [ :each | each puntuador nombreDeUsuario = unUsuario nombreDeUsuario ]
 ]
 
-{ #category : #accesing }
+{ #category : #private }
 Posteo >> tuCreadorEsSeguidoPor: unUsuario [ 
 	^ (creadorDelPosteo teSigue: unUsuario )
 ]
